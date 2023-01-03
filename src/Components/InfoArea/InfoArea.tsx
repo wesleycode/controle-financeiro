@@ -1,5 +1,5 @@
 import React from 'react';
-import {converterMesNumeroParaMesTexto} from '../../Utils/DateUtil';
+import {converterMesNumeroParaMesTexto} from '../../utils/DateUtil';
 import {InfoItem} from '../InfoItem/InfoItem';
 import {IconButton} from "../IconButton/IconButton";
 import {Spacer} from "../Spacer/Spacer";

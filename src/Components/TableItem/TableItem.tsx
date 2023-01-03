@@ -1,6 +1,6 @@
-import {ItemType} from "../../Types/ItemType";
-import {categories} from "../../Data/Categories";
-import {padronizarData} from "../../Utils/DateUtil";
+import {ItemType} from "../../types/ItemType";
+import {categories} from "../../data/Categories";
+import {padronizarData} from "../../utils/DateUtil";
 import {Badge, Box, Td, Text, Tr} from "@chakra-ui/react";
 
 type Props = {

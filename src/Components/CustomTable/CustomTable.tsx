@@ -1,4 +1,4 @@
-import {ItemType} from "../../Types/ItemType";
+import {ItemType} from "../../types/ItemType";
 import {TableItem} from "../TableItem/TableItem";
 import {MainCard} from "../MainCard/MainCard";
 import React from "react";

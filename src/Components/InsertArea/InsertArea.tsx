@@ -1,6 +1,6 @@
 import {MainCard} from '../MainCard/MainCard';
 import {Spacer} from '../Spacer/Spacer';
-import React, {FormEvent, FormEventHandler, useState} from 'react';
+import React, {ChangeEvent, FormEvent, FormEventHandler, useState} from 'react';
 import {
     FormControl,
     FormLabel,
@@ -12,11 +12,19 @@ import {
     NumberInputField,
     NumberInputStepper,
     NumberIncrementStepper,
-    NumberDecrementStepper, Button, Badge, Flex
+    NumberDecrementStepper,
+    Button,
+    Badge,
+    Flex,
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
+    CloseButton,
 } from '@chakra-ui/react';
-import {CategoryType} from "../../Types/CategoryType";
-import {converterStringEmDate} from "../../Utils/DateUtil";
-import { ItemType } from '../../Types/ItemType';
+import {CategoryType} from "../../types/CategoryType";
+import {converterStringEmDate} from "../../utils/DateUtil";
+import {ItemType} from '../../types/ItemType';
 
 type Props = {
     listCategoria: CategoryType[],
@@ -25,27 +33,21 @@ type Props = {
 
 export function InsertArea({listCategoria, addNewItem}: Props) {
 
-    const [titulo, setTitulo] = useState<string>('');
-    const [newData, setData] = useState<Date>();
-    const [categoriaId, setCategoriaId] = useState<string>('');
-    const [valor, setValor] = useState<number>(0);
+    const itemModelDefault: ItemType = {
+        id: 0,
+        titulo: '',
+        data: new Date(),
+        valor: 0,
+        categoriaIndex: 0,
+    }
+
+    const [itemModel, setItemModel] = useState<ItemType>(itemModelDefault);
+    const [display, setDisplay] = useState<string>('none');
 
     function submitForm(formEvent: FormEvent<HTMLFormElement>) {
-
-        const data: ItemType = {
-            id: 50,
-            categoriaIndex: parseInt(categoriaId),
-            data: newData === undefined ? new Date() : newData,
-            titulo: titulo,
-            valor: valor,
-        }
-
-        addNewItem(data);
-
-        alert('Salvo com sucesso!');
-
+        addNewItem(itemModel);
+        setDisplay('flex');
         formEvent.preventDefault();
-
     }
 
     return (
@@ -67,16 +69,32 @@ export function InsertArea({listCategoria, addNewItem}: Props) {
 
                 <Spacer height={30}/>
 
+                <Alert status='success' display={display} justifyContent='space-between'>
+                    <Flex>
+                        <AlertIcon/>
+                        <AlertDescription>Movimentação Adicionada com Sucesso!</AlertDescription>
+                    </Flex>
+                    <CloseButton
+                        onClick={() => {
+                            setDisplay('none')
+                        }}
+                    />
+                </Alert>
+
+                <Spacer height={30}/>
+
                 <form onSubmit={submitForm}>
                     <FormControl isRequired>
 
                         <FormLabel>Título</FormLabel>
                         <Input
+                            name='input-titulo'
                             type='text'
                             variant='filled'
-                            onChange={(text) => {
-                                setTitulo(text.target.value);
-                            }}
+                            // onChange={(text) => {
+                            //     setTitulo(text.target.value);
+                            // }}
+                            onChange={(e) => setItemModel({...itemModel, titulo: e.target.value})}
                             placeholder='Entre com o texto que descreve a ocorrência'
                         />
 
@@ -88,9 +106,13 @@ export function InsertArea({listCategoria, addNewItem}: Props) {
                         <Input
                             type='date'
                             variant='filled'
-                            onChange={(data) => {
-                                setData(converterStringEmDate(data.target.value));
-                            }}
+                            // onChange={(data) => {
+                            //     setData(converterStringEmDate(data.target.value));
+                            // }}
+                            onChange={(e) => setItemModel({
+                                ...itemModel,
+                                data: e.target.value === undefined ? new Date() : converterStringEmDate(e.target.value)
+                            })}
                         />
 
                         <Spacer
@@ -102,8 +124,11 @@ export function InsertArea({listCategoria, addNewItem}: Props) {
                             id='asdasd'
                             placeholder='Selecione uma categoria'
                             variant='filled'
-                            value={categoriaId}
-                            onChange={(selected) => setCategoriaId(selected.target.value)}
+                            value={itemModel.categoriaIndex}
+                            // onChange={(selected) => setCategoriaId(selected.target.value)}
+                            onChange={(event) => {
+                                setItemModel({...itemModel, categoriaIndex: parseInt(event.target.value)})
+                            }}
                         >
                             {
                                 listCategoria.map((item, index) => (
@@ -123,8 +148,11 @@ export function InsertArea({listCategoria, addNewItem}: Props) {
                         >
                             <Text>R$</Text>
                             <NumberInput
-                                onChange={(valueString) => setValor(parseFloat(valueString))}
-                                value={isNaN(valor) ? 0 : valor}
+                                // onChange={(valueString) => setValor(parseFloat(valueString))}
+                                onChange={(value) => {
+                                    setItemModel({...itemModel, valor: parseInt(value)})
+                                }}
+                                value={isNaN(itemModel.valor) ? 0 : itemModel.valor}
                                 min={0}
                                 defaultValue={0}
                                 precision={2}

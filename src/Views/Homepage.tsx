@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { items } from "../Data/Items";
-import { ItemType } from "../Types/ItemType";
-import { CustomTable } from "../Components/CustomTable/CustomTable";
-import { InfoArea } from "../Components/InfoArea/InfoArea";
-import { filtrarListaPorMes } from "../Filters/DateFilter";
-import { getDataAtual } from "../Utils/DateUtil";
-import { APPLICATION_NAME } from "../Constants/ApplicationConstants";
-import { categories } from '../Data/Categories';
-import { InsertArea } from "../Components/InsertArea/InsertArea";
-import { Spacer } from "../Components/Spacer/Spacer";
+import { items } from "../data/Items";
+import { ItemType } from "../types/ItemType";
+import { CustomTable } from "../components/CustomTable/CustomTable";
+import { InfoArea } from "../components/InfoArea/InfoArea";
+import { filtrarListaPorMes } from "../filters/DateFilter";
+import { getDataAtual } from "../utils/DateUtil";
+import { APPLICATION_NAME } from "../constants/ApplicationConstants";
+import { categories } from '../data/Categories';
+import { InsertArea } from "../components/InsertArea/InsertArea";
+import { Spacer } from "../components/Spacer/Spacer";
 import { Box, Heading } from "@chakra-ui/react";
 
 export function HomePage() {

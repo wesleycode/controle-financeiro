@@ -1,4 +1,4 @@
-import { ItemType } from "../Types/ItemType";
+import { ItemType } from "../types/ItemType";
 
 export function filtrarListaPorMes(list: ItemType[], currentDate: Date): ItemType[] {
     let novaLista: ItemType[] = [];
