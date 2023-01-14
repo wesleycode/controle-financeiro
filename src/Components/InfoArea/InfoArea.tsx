@@ -1,11 +1,11 @@
 import React from 'react';
-import {converterMesNumeroParaMesTexto} from '../../utils/DateUtil';
 import {InfoItem} from '../InfoItem/InfoItem';
 import {IconButton} from "../IconButton/IconButton";
 import {Spacer} from "../Spacer/Spacer";
 import {MainCard} from "../MainCard/MainCard";
 import {Badge, Box, Text} from "@chakra-ui/react";
 import {AddIcon, ArrowBackIcon, ArrowForwardIcon, MinusIcon, RepeatIcon} from "@chakra-ui/icons";
+import { converterMesNumeroParaMesTexto } from '../../utils/DateUtil';
 
 type Props = {
     currentDate: Date

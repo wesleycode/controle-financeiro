@@ -1,8 +1,8 @@
-import {ItemType} from "../../types/ItemType";
 import {TableItem} from "../TableItem/TableItem";
 import {MainCard} from "../MainCard/MainCard";
 import React from "react";
 import {Table, TableContainer, Thead, Tbody, Tr, Th} from "@chakra-ui/react";
+import { ItemType } from "../../types/ItemType";
 
 const thStyle: React.CSSProperties = {
     padding: '10px 0',
